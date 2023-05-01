@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="Todo.css">
+</head>
+
+<body>
+    <div class="row ">
+        <div class=" col-sm-12 todo">
+
+            <h3>My Todos</h3>
+            
+            <input type="hidden" id="saveIndex" />
+            <div class="buttons" style="display:flex; justify-content: center;">
+                <input type="text" id="inputBox" placeholder="Enter yout Todos....." class="box">
+                <button onclick="AddData()" id="add-task-btn" class="btn2"> Add </button>
+                <button onclick="saveData()" class="btn2" id="savebtn" style="display: none">Save</button>
+            
+            </div>
+            <div id="displayData" style="display: flex;
+            justify-content: center;"></div>
+        </div>
+    </div>
+
+
+
+    <script>
+        const saveIndex = document.getElementById('saveIndex')
+        function Display() {
+
+            let TodoArray;
+            let displayData = document.getElementById('displayData')
+            let localData = localStorage.getItem('TodoData')
+
+
+            if (localData === null) {
+                TodoArray = []
+            }
+            else {
+                TodoArray = JSON.parse(localData)
+            }
+
+            let htmlCode = ""
+
+            TodoArray.forEach((element, index) => {
+                htmlCode += `<div class="todo-containt "><div class="row "><p class="col-sm-6">${element} </p><div class="col-sm-6 buttons"><button onclick='edit(${index})'id="save-todo-btn"class="edit" ><i class="fa fa-edit"></i></button> &nbsp; <button onclick='deleteTodo(${index})'class="delete"><i class="fa fa-trash-o"></i></button></div></div></div>`
+
+                //  htmlCode += ` <input type="text" id=${index} value=${element} readonly="true"> <button id=${index} onclick="editElement(this.id)">edit</edit> <button id=${index} onclick="EditTodo(this.id)">update</button>  `
+            })
+            displayData.innerHTML = htmlCode
+        }
+        Display()
+        // function EditTodo(id){
+        //     saveIndex.value=id
+        //     let updateValue = document.getElementById(id).value
+        //     console.log(updateValue)
+        //     let localData = localStorage.getItem("TodoData");
+
+        //     let TodoArray = JSON.parse(localData) //parse\
+
+        //     console.log(localData.text)
+        //     TodoArray[id] = updateValue.value
+        //     debugger
+        //     localStorage.setItem("TodoData", JSON.stringify(TodoArray));
+        //     debugger
+        // }
+
+        // function editElement(index){
+        //     alert(index)
+        //     let inputBorder = document.getElementById(index).style.border="1px black solid"
+        //     document.getElementById(index).readOnly=false
+
+        // }
+
+
+        function AddData() {
+            //event.preventDefault();
+            let TodoArray;
+            let localData = localStorage.getItem('TodoData')
+            let inputData = document.getElementById('inputBox').value
+
+            console.log(inputData)
+            if (localData === null) {
+                TodoArray = [];
+            } else {
+                TodoArray = JSON.parse(localData);
+                console.log(TodoArray)
+            }
+            TodoArray.push(inputData)
+            localStorage.setItem('TodoData', JSON.stringify(TodoArray));
+            document.getElementById('inputBox').value=""
+
+
+            Display()
+
+        }
+
+        function deleteTodo(index) {
+            let localData = localStorage.getItem('TodoData')
+            TodoArray = JSON.parse(localData);
+            TodoArray.splice(index,1);
+            localStorage.setItem('TodoData', JSON.stringify(TodoArray));
+            Display()
+        }
+    
+        function edit(index) {
+            var addTaskButton = document.getElementById("add-task-btn");
+            var saveButton = document.getElementById("savebtn");
+            saveIndex.value = index;
+            let localData = localStorage.getItem('TodoData')
+            TodoArray = JSON.parse(localData);
+            inputBox.value = TodoArray[index]
+            debugger
+            if (inputBox) {
+                addTaskButton.style.display = "none"
+                document.getElementById("savebtn").style = "visibility:show";
+            }
+            else {
+                addTaskButton.textContent = "Add";
+            }
+
+
+            addTaskButton.addEventListener("click", () => {
+
+                addTaskButton.textContent = "Add"
+                inputBox.value = "";
+            })
+          
+            saveButton.addEventListener("click", () => {
+              
+              let localData = localStorage.getItem('TodoData')
+              TodoArray = JSON.parse(localData);
+              let id = saveIndex.value;
+              TodoArray[id] = inputBox.value;
+              localStorage.setItem("TodoData", JSON.stringify(TodoArray));
+              addTaskButton.style.display="block"
+              saveButton.style.display="none"
+            document.getElementById('inputBox').value=""
+              Display();
+          })
+            Display()
+        }
+
+    </script>
+</body>
+
+</html>

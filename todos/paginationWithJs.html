@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex;justify-content: center;">
+        <table  border ="1" id="example" class="table table-striped table-bordered" style="width:50%;text-align: center;" >
+            <thead >
+                <tr>
+                    <th>id</th>
+                    <th>firstName</th>
+                    <th>lastName</th>
+                </tr>
+            </thead>
+            <tbody id="table_data">
+              
+            </tbody>
+        </table>   
+    </div>
+    <div>
+        <nav aria-label="" id="example">
+            <ul class="pagination" style="list-style: none;display: flex; justify-content: center;">
+              <li class="page-item" onclick="paginationHandler()"><button class="page-link" href="#" id="prev">Previous</button></li>
+              <li id="dhbjbs"></li>
+              <li class="page-item" onclick="paginationHandler()"><button class="page-link" href="#" id="next">Next</button></li>
+            </ul>
+          </nav> 
+
+    </div>
+    <script>
+         var userdata = [
+        {
+            userId: 1,
+            firstName: "Krish",
+            lastName: "Lee",
+            phoneNumber: "123456",
+            emailAddress: "krish.lee@learningcontainer.com"
+        },
+        {
+            userId: 2,
+            firstName: "racks",
+            lastName: "jacson",
+            phoneNumber: "123456",
+            emailAddress: "racks.jacson@learningcontainer.com"
+        },
+        {
+            userId: 3,
+            firstName: "denial",
+            lastName: "roast",
+            phoneNumber: "33333333",
+            emailAddress: "denial.roast@learningcontainer.com"
+        },
+        {
+            userId: 4,
+            firstName: "devid",
+            lastName: "neo",
+            phoneNumber: "222222222",
+            emailAddress: "devid.neo@learningcontainer.com"
+        },
+        {
+            userId: 5,
+            firstName: "jone",
+            lastName: "mac",
+            phoneNumber: "111111111",
+            emailAddress: "jone.mac@learningcontainer.com"
+        },
+        {
+            userId: 6,
+            firstName: "Krish 2",
+            lastName: "Lee",
+            phoneNumber: "123456",
+            emailAddress: "krish.lee@learningcontainer.com"
+        },
+        {
+            userId: 7,
+            firstName: "racks 2",
+            lastName: "jacson",
+            phoneNumber: "123456",
+            emailAddress: "racks.jacson@learningcontainer.com"
+        },
+        {
+            userId: 8,
+            firstName: "denial 2",
+            lastName: "roast",
+            phoneNumber: "33333333",
+            emailAddress: "denial.roast@learningcontainer.com"
+        },
+        {
+            userId: 9,
+            firstName: "devid 2",
+            lastName: "neo",
+            phoneNumber: "222222222",
+            emailAddress: "devid.neo@learningcontainer.com"
+        },
+        {
+            userId: 10,
+            firstName: "devid 2",
+            lastName: "neo",
+            phoneNumber: "222222222",
+            emailAddress: "devid.neo@learningcontainer.com"
+        },
+        {
+            userId: 11,
+            firstName: "jone 2",
+            lastName: "mac",
+            phoneNumber: "111111111",
+            emailAddress: "jone.mac@learningcontainer.com"
+        },
+        {
+            userId: 12,
+            firstName: "sdfsdf",
+            lastName: "dfadf",
+            phoneNumber: "111111111",
+            emailAddress: "jone.mac@learningcontainer.com"
+        }
+        ]
+
+        
+        let start_i = 0
+        let end_i = 3
+function showData(){
+    let tbl_d = ""
+    let ab = userdata.slice(start_i, end_i)
+    for(var i=0;i<ab.length;i++){
+        tbl_d+=`<tr>
+            <td>${ab[i].userId}</td>
+            <td>${ab[i].firstName}</td>
+            <td>${ab[i].lastName}</td>
+            </tr>`
+        }
+        
+        document.getElementById("table_data").innerHTML = tbl_d
+        const pageCount = Math.ceil(userdata.length / 3);
+        let a ="";
+        for (let index = 0; index < pageCount; index++) {
+            
+              a += `<button onclick="getdata()">${index+1}</button>`
+            }
+            document.getElementById("dhbjbs").innerHTML=a
+          
+}
+
+window.onload = showData()
+function paginationHandler (){
+  if(event.target.id == "next"){
+    start_i = start_i + 3
+    end_i = end_i + 3
+  }
+  if(event.target.id == "prev"){
+      start_i = start_i - 3
+      end_i = end_i - 3
+    }
+showData()
+}
+
+function getdata(){
+   let getdata= parseInt(event.target.innerHTML)
+   start_i= (getdata*3)-3
+   end_i = (getdata*3)
+   showData()
+}
+    </script>
+    
+</body>
+</html>

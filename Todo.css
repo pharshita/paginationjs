@@ -1,0 +1,63 @@
+html,body{
+    overflow: hidden;
+    background-color: rgb(106, 208, 208);
+    text-align: center;
+    
+}
+.box{
+    width: 31%;
+    height: 45px;
+    font-size: 15px;
+    /* margin-top: 20px; */
+    padding-left: 10px;
+    background: rgba(255, 255, 255, 0.995);
+box-shadow: 0 2px 32px 0 rgba( 31, 38, 135, 0.37 );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+   
+}
+.box:focus{
+    outline: none;
+}
+.btn2{
+    padding: 10px 22px;
+    margin-left: -5px;
+    background-color: rgb(12, 36, 64);
+    color: #fff;
+    border: none;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+}
+.todo-containt{
+    /* background-color: rgb(141, 131, 131); */
+    width: 35%;
+    /* margin-left: 463px; */
+    padding: 10px 20px;
+    background-color: #fff;
+}
+.todo-containt p{
+    /* color: #fff; */
+    font-size: 20px;
+    text-align: left;
+}
+.edit{
+    /* padding: 10px 20px; */
+    color: rgb(55, 125, 65);
+    border: none;
+    background-color: transparent;   
+    font-size: 20px; 
+}
+.delete{
+    color: red;
+    background-color: transparent;
+    border: none;
+    font-size: 20px; 
+    /* padding: 10px 20px; */
+}
+.buttons{
+    text-align: end;
+}
+.todo{
+    margin-top: 30px;
+}
